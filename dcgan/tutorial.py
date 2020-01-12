@@ -174,7 +174,7 @@ torch.manual_seed(manualSeed)
 #
 
 # Root directory for dataset
-dataroot = "/Users/relu/data/benchmark_images/ak47/img_align_celeba"
+dataroot = "/Users/relu/data/benchmark_images/ak47/" # align_celeba
 
 # Number of workers for dataloader
 workers = 2
@@ -490,10 +490,6 @@ criterion = nn.BCELoss()
 #  the progression of the generator
 fixed_noise = torch.randn(64, nz, 1, 1, device=device)
 
-# Establish convention for real and fake labels during training
-real_label = 1
-fake_label = 0
-
 # Setup Adam optimizers for both G and D
 optimizerD = optim.Adam(netD.parameters(), lr=lr, betas=(beta1, 0.999))
 optimizerG = optim.Adam(netG.parameters(), lr=lr, betas=(beta1, 0.999))
@@ -567,14 +563,14 @@ optimizerG = optim.Adam(netG.parameters(), lr=lr, betas=(beta1, 0.999))
 # run and if you removed some data from the dataset.
 #
 
+# Establish convention for real and fake labels during training
+real_label = 1
+fake_label = 0
 # Training Loop
 
 # Lists to keep track of progress
-img_list = []
-G_losses = []
-D_losses = []
-iters = 0
-
+img_list, iters = [], 0
+G_losses,  D_losses = [], []
 print("Starting Training Loop...")
 # For each epoch
 for epoch in range(num_epochs):
