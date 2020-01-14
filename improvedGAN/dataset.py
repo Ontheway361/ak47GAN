@@ -6,8 +6,10 @@ import numpy as np
 from torch.utils.data import TensorDataset
 from torchvision import datasets, transforms
 
-def MnistLabel(class_num):
-    raw_dataset = datasets.MNIST('../../cs231n/benchmark', train=True, download=True,
+root_dir = '/Users/relu/data/deep_learning/cs231n/benchmark' # mini-mac
+
+def MnistSup(class_num):
+    raw_dataset = datasets.MNIST(root_dir, train=True, download=True,
                    transform=transforms.Compose([transforms.ToTensor()]))
     class_tot = [0] * 10
     data = []
@@ -27,13 +29,13 @@ def MnistLabel(class_num):
     return TensorDataset(torch.FloatTensor(np.array(data)), torch.LongTensor(np.array(labels)))
 
 
-def MnistUnlabel():
-    return datasets.MNIST('../../cs231n/benchmark', train=True, download=True,
+def MnistUsup():
+    return datasets.MNIST(root_dir, train=True, download=True,
                    transform=transforms.Compose([transforms.ToTensor()]))
 
 
 def MnistTest():
-    return datasets.MNIST('../../cs231n/benchmark', train=False, download=True,
+    return datasets.MNIST(root_dir, train=False, download=True,
                    transform=transforms.Compose([transforms.ToTensor()]))
 
 
